@@ -1,5 +1,12 @@
 # TaskManagementAngular
 
+Version used:
+
+node v12.18.2
+npm 6.14.5
+Angular CLI: 9.0.0-rc.7
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0-rc.7.
 
 ## Development server
@@ -25,3 +32,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+"# task-management-angular" 
