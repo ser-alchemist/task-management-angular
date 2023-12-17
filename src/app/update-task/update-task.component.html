@@ -1,43 +1,54 @@
 <h3>Update Task</h3>
 <div style="width: 400px;">
+  <p class="text-danger">**All fields are mandatory</p>
   <!--  <form (ngSubmit)="onSubmit()">-->
   <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" novalidate>
     <div class="form-group">
       <label>Description</label>
       <input type="text" class="form-control" id="desc" required [(ngModel)]="task.description" name="desc">
     </div>
-
+    <br>
     <div class="form-group">
       <label>Due Date</label>
       <input type="date" class="form-control" id="due" required [(ngModel)]="task.dueDate" name="due" >
     </div>
+    <br>
 
     <div class="form-group">
-      <label>Priority:</label><br>
+      <label>Status:</label><br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="status_active" required [(ngModel)]="task.status" name="status" value='ACTIVE'>
+        <label class="form-check-label" for="status_active">Active</label><br>
+      </div>
 
-      <input type="radio" id="status_active" required [(ngModel)]="task.status" name="status" value='ACTIVE'>
-      <label for="status_active">ACTIVE</label><br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="status_inactive" required [(ngModel)]="task.status" name="status" value='INACTIVE'>
+        <label class="form-check-label" for="status_inactive">Inactive</label><br>
+      </div>
 
-      <input type="radio" id="status_inactive" required [(ngModel)]="task.status" name="status" value='INACTIVE'>
-      <label for="status_inactive">INACTIVE</label><br>
-
-      <input type="radio" id="status_completed" required [(ngModel)]="task.status" name="status" value='COMPLETED'>
-      <label for="status_completed">COMPLETED</label><br>
-
-
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="status_completed" required [(ngModel)]="task.status" name="status" value='COMPLETED'>
+        <label class="form-check-label" for="status_completed">Completed</label><br>
+      </div>
     </div>
 
     <div class="form-group">
       <label>Priority:</label><br>
 
-      <input type="radio" id="priority_high" required [(ngModel)]="task.priority" name="priority" value=0>
-      <label for="priority_high">High</label><br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="priority_high" required [(ngModel)]="task.priority" name="priority" value="HIGH">
+        <label class="form-check-label" for="priority_high">High</label><br>
+      </div>
 
-      <input type="radio" id="priority_med" required [(ngModel)]="task.priority" name="priority" value=1>
-      <label for="priority_med">Medium</label><br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="priority_med" required [(ngModel)]="task.priority" name="priority" value="MEDIUM">
+        <label class="form-check-label" for="priority_med">Medium</label><br>
+      </div>
 
-      <input type="radio" id="priority_low" required [(ngModel)]="task.priority" name="priority" value=2>
-      <label for="priority_low">Low</label><br>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="priority_low" required [(ngModel)]="task.priority" name="priority" value="LOW">
+        <label class="form-check-label" for="priority_low">Low</label><br>
+      </div>
 
     </div>
     <br>
