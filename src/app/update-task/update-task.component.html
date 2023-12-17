@@ -1,6 +1,6 @@
 <h3>Update Task</h3>
 <div style="width: 400px;">
-  <p class="text-danger">**All fields are mandatory</p>
+  <p [hidden]="taskForm.valid" class="text-danger">**All fields are mandatory</p>
   <!--  <form (ngSubmit)="onSubmit()">-->
   <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" novalidate>
     <div class="form-group">
