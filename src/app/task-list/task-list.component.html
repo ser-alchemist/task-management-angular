@@ -2,6 +2,16 @@
   <div class="panel-heading">
     <h2>Task List</h2>
   </div>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="swithActive" (change)="toggleFilterStatus($event)">
+    <label class="form-check-label" for="swithActive">Hide INACTIVE/COMPLETED tasks</label>
+  </div>
+
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="swithDate" (change)="toggleFilterDate($event)">
+    <label class="form-check-label" for="swithDate">Hide expired tasks</label>
+  </div>
+
 
   <div class="panel-body">
     <table class="table table-striped">

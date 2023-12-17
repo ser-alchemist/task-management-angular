@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {Task} from '../task';
 import {TaskService} from '../task.service';
 import {Router} from '@angular/router';
-
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -13,6 +13,8 @@ import {Router} from '@angular/router';
 })
 export class TaskListComponent implements OnInit {
   tasks: Observable<Task[]>;
+  showActiveOnly = false;
+  hideExpired = false;
   constructor(private taskService: TaskService,
               private router: Router) {}
   ngOnInit() {
@@ -21,6 +23,34 @@ export class TaskListComponent implements OnInit {
 
   reloadData() {
     this.tasks = this.taskService.getTaskList();
+  }
+  filterTasksByStatus() {
+    this.tasks = this.tasks.pipe(
+      map(tasks => tasks.filter(task => task.status === 'ACTIVE'))
+    );
+  }
+  filterTasksByDate() {
+    this.tasks = this.tasks.pipe(
+      map(tasks => tasks.filter(task => new Date(task.dueDate) >= new Date()))
+    );
+  }
+
+  toggleFilterStatus(event: any) {
+    this.showActiveOnly = event.target.checked;
+    if (this.showActiveOnly) {
+      this.filterTasksByStatus();
+    } else {
+      this.reloadData();
+    }
+  }
+
+  toggleFilterDate(event: any) {
+    this.hideExpired = event.target.checked;
+    if (this.hideExpired) {
+      this.filterTasksByDate();
+    } else {
+      this.reloadData();
+    }
   }
 
   deleteTask(id: number) {
