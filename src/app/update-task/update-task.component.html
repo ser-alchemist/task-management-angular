@@ -3,12 +3,12 @@
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Description</label>
-      <input type="text" class="form-control" id="desc" required [(ngModel)]="task.desc" name="desc">
+      <input type="text" class="form-control" id="desc" required [(ngModel)]="task.description" name="desc">
     </div>
 
     <div class="form-group">
       <label for="name">Due Date</label>
-      <input type="date" class="form-control" id="due" required [(ngModel)]="task.due" name="due">
+      <input type="date" class="form-control" id="due" required [(ngModel)]="task.dueDate" name="due">
     </div>
 
     <div class="form-group">

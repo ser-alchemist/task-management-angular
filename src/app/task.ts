@@ -1,8 +1,8 @@
 export class Task {
   tid: number;
   uid: number;
-  desc: string;
-  due: Date;
-  stat: number;
+  description: string;
+  dueDate: Date;
+  status: number;
   priority: number;
 }

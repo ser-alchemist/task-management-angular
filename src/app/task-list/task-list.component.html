@@ -15,9 +15,9 @@
       </thead>
       <tbody>
       <tr *ngFor="let task of tasks | async">
-        <td>{{task.desc}}</td>
-        <td>{{task.due}}</td>
-        <td>{{task.stat}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.dueDate}}</td>
+        <td>{{task.status}}</td>
         <td>{{task.priority}}</td>
         <td><button (click)="deleteTask(task.tid)" class="btn btn-danger">Delete</button>
           <button (click)="taskDetails(task.tid)" class="btn btn-info" style="margin-left: 10px">Details</button>

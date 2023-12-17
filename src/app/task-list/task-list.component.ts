@@ -15,11 +15,11 @@ export class TaskListComponent implements OnInit {
   tasks: Observable<Task[]>;
   constructor(private taskService: TaskService,
               private router: Router) {}
-  ngOnInit(){
+  ngOnInit() {
     this.reloadData();
   }
 
-  reloadData(){
+  reloadData() {
     this.tasks = this.taskService.getTaskList();
   }
 
@@ -33,7 +33,7 @@ export class TaskListComponent implements OnInit {
         error => console.log(error));
   }
 
-  taskDetails(id: number){
+  taskDetails(id: number) {
     this.router.navigate(['details', id]);
   }
 

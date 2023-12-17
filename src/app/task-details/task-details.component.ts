@@ -22,13 +22,13 @@ export class TaskDetailsComponent implements OnInit {
 
     this.taskService.getTask(this.id)
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
         this.task = data;
       }, error => console.log(error));
   }
 
   list() {
-    this.router.navigate(['employees']);
+    this.router.navigate(['tasks']);
   }
 
 }
