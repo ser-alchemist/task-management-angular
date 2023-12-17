@@ -37,5 +37,9 @@ export class TaskListComponent implements OnInit {
     this.router.navigate(['details', id]);
   }
 
+  updateTask(id: number) {
+    this.router.navigate(['update', id]);
+  }
+
 
 }

@@ -1,7 +1,7 @@
 <h3>Create Task</h3>
 <div [hidden]="submitted" style="width: 400px;">
 <!--  <form (ngSubmit)="onSubmit()">-->
-  <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" novalidate>
+<form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" novalidate>
   <div class="form-group">
       <label>Description</label>
       <input type="text" class="form-control" id="desc" required [(ngModel)]="task.description" name="desc">
