@@ -71,5 +71,16 @@ export class TaskListComponent implements OnInit {
     this.router.navigate(['update', id]);
   }
 
+  sortByDueDateO2L() {
+    this.tasks = this.tasks.pipe(
+      map(tasks => tasks.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()))
+    );
+  }
+
+  sortByDueDateL2O() {
+    this.tasks = this.tasks.pipe(
+      map(tasks => tasks.sort((a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime()))
+    );
+  }
 
 }
