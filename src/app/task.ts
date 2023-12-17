@@ -3,6 +3,6 @@ export class Task {
   uid: number;
   description: string;
   dueDate: Date;
-  status: number;
+  status: string;
   priority: number;
 }

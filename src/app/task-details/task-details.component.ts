@@ -12,7 +12,7 @@ export class TaskDetailsComponent implements OnInit {
 
   id: number;
   task: Task;
-  constructor(private route: ActivatedRoute,private router: Router,
+  constructor(private route: ActivatedRoute, private router: Router,
               private taskService: TaskService) { }
 
   ngOnInit() {
