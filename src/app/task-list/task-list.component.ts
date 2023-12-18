@@ -116,8 +116,14 @@ export class TaskListComponent implements OnInit {
         return 'status-inactive';
       case 'COMPLETED':
         return 'status-completed';
+      case 'HIGH':
+        return 'priority-high';
+      case 'MEDIUM':
+        return 'priority-medium';
+      case 'LOW':
+        return 'priority-low';
       default:
-        return ''; // Default class if status doesn't match any condition
+        return '';
     }
   }
 

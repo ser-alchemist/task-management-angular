@@ -52,7 +52,7 @@
         <td>{{task.description}}</td>
         <td [ngClass]="getDateStatus(task.dueDate)">{{task.dueDate}}</td>
         <td [ngClass]="getStatusClass(task.status)">{{task.status}}</td>
-        <td>{{task.priority}}</td>
+        <td [ngClass]="getStatusClass(task.priority)">{{task.priority}}</td>
         <td>
           <button (click)="deleteTask(task.tid)" class="btn btn-danger">Delete</button>
           <button (click)="updateTask(task.tid)" class="btn btn-warning" style="margin-left: 10px">Update</button>

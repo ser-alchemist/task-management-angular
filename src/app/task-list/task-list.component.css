@@ -20,3 +20,15 @@
 .status-valid{
   color: #3e8e41;
 }
+
+.priority-high{
+  color: red;
+}
+
+.priority-medium{
+  color: #9a9204;
+}
+
+.priority-low{
+  color: green;
+}
