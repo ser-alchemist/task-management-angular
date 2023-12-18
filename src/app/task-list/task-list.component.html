@@ -24,7 +24,7 @@
             <button class="dropdown-item" type="button" (click)="sortByDueDateL2O()">Due Date (Latest to Oldest)</button>
             <button class="dropdown-item" type="button" (click)="sortByDueDateO2L()">Due Date (Oldest to Latest)</button>
             <button class="dropdown-item" type="button" (click)="sortByPriorityH2L()">Priority (High to Low)</button>
-            <button class="dropdown-item" type="button">Action (Low to High)</button>
+            <button class="dropdown-item" type="button" (click)="sortByPriorityL2H()">Priority (Low to High)</button>
 
           </div>
         </div>
@@ -50,8 +50,8 @@
       <tbody>
       <tr *ngFor="let task of tasks | async">
         <td>{{task.description}}</td>
-        <td>{{task.dueDate}}</td>
-        <td>{{task.status}}</td>
+        <td [ngClass]="getDateStatus(task.dueDate)">{{task.dueDate}}</td>
+        <td [ngClass]="getStatusClass(task.status)">{{task.status}}</td>
         <td>{{task.priority}}</td>
         <td>
           <button (click)="deleteTask(task.tid)" class="btn btn-danger">Delete</button>

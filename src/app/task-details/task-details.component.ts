@@ -22,7 +22,7 @@ export class TaskDetailsComponent implements OnInit {
 
     this.taskService.getTask(this.id)
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.task = data;
       }, error => console.log(error));
   }
@@ -30,5 +30,4 @@ export class TaskDetailsComponent implements OnInit {
   list() {
     this.router.navigate(['tasks']);
   }
-
 }

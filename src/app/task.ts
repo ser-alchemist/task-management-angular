@@ -4,5 +4,5 @@ export class Task {
   description: string;
   dueDate: Date;
   status: string;
-  priority: number;
+  priority: string;
 }

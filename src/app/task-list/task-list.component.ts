@@ -83,4 +83,52 @@ export class TaskListComponent implements OnInit {
     );
   }
 
+  sortByPriorityH2L() {
+    this.tasks = this.tasks.pipe(
+      map(tasks => tasks.sort((a, b) => this.mapPriority(a.priority) - this.mapPriority(b.priority)))
+    );
+  }
+
+  sortByPriorityL2H() {
+    this.tasks = this.tasks.pipe(
+      map(tasks => tasks.sort((a, b) => this.mapPriority(b.priority) - this.mapPriority(a.priority)))
+    );
+  }
+
+  mapPriority(priority: string): number {
+    switch (priority) {
+      case 'LOW':
+        return 2;
+      case 'MEDIUM':
+        return 1;
+      case 'HIGH':
+        return 0;
+      default:
+        return 999; // Handle other cases if necessary
+    }
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'ACTIVE':
+        return 'status-active';
+      case 'INACTIVE':
+        return 'status-inactive';
+      case 'COMPLETED':
+        return 'status-completed';
+      default:
+        return ''; // Default class if status doesn't match any condition
+    }
+  }
+
+  getDateStatus(dueDate: string): string {
+    if (new Date(dueDate) >= new Date()) {
+      return 'status-valid';
+    } else {
+      return 'status-expired';
+    }
+  }
+
+
+
 }

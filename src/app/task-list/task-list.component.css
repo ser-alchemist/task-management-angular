@@ -1,0 +1,22 @@
+.status-active {
+  color: green;
+  /*font-weight: bold;*/
+}
+
+.status-inactive {
+  color: #ffdd00;
+  /*font-weight: bold;*/
+}
+
+.status-completed {
+  color: #e70cdf;
+  /*font-weight: bold;*/
+}
+
+.status-expired{
+  color: red;
+}
+
+.status-valid{
+  color: #3e8e41;
+}
