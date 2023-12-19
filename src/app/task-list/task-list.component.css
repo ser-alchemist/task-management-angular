@@ -1,10 +1,14 @@
+div{
+  background: #fdffea;
+}
+
 .status-active {
   color: green;
-  /*font-weight: bold;*/
+  font-weight: bold;
 }
 
 .status-inactive {
-  color: #ffdd00;
+  color: #9a9204;
   /*font-weight: bold;*/
 }
 
@@ -23,6 +27,7 @@
 
 .priority-high{
   color: red;
+  font-weight: bold;
 }
 
 .priority-medium{
