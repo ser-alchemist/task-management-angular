@@ -48,18 +48,21 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let task of tasks | async">
+      <tr *ngFor="let task of tasks">
         <td>{{task.description}}</td>
         <td [ngClass]="getDateStatus(task.dueDate)">{{task.dueDate}}</td>
         <td [ngClass]="getStatusClass(task.status)">{{task.status}}</td>
         <td [ngClass]="getStatusClass(task.priority)">{{task.priority}}</td>
         <td>
-          <button (click)="deleteTask(task.tid)" class="btn btn-danger">Delete</button>
-          <button (click)="updateTask(task.tid)" class="btn btn-warning" style="margin-left: 10px">Update</button>
-          <button (click)="taskDetails(task.tid)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          <button (click)="deleteTask(task.tid)" class="btn btn-danger" title="Delete"><i class="material-icons">delete</i></button>
+          <button (click)="updateTask(task.tid)" class="btn btn-warning" title="Update" style="margin-left: 10px"><i class="material-icons">update</i></button>
+          <button (click)="taskDetails(task.tid)" class="btn btn-info" title="Details" style="margin-left: 10px"><i class="material-icons">info</i></button>
         </td>
       </tr>
       </tbody>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" [length]="totalElements"
+                   (page)="nextPage($event)">
+    </mat-paginator>
   </div>
 </div>

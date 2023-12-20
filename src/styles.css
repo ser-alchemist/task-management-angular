@@ -1,7 +1,9 @@
 /* Dropdown Button */
+/*
 div{
   background: #fdffea;
 }
+*/
 
 
 .dropbtn {
@@ -44,3 +46,6 @@ div{
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

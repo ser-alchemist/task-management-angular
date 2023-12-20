@@ -4,6 +4,7 @@ import {Task} from '../task';
 import {TaskService} from '../task.service';
 import {Router} from '@angular/router';
 import { map } from 'rxjs/operators';
+import {PageEvent} from '@angular/material/paginator';
 
 
 @Component({
@@ -13,8 +14,10 @@ import { map } from 'rxjs/operators';
 })
 export class TaskListComponent implements OnInit {
   tasks: Observable<Task[]>;
+  // tasks: Task[];
   showActiveOnly = false;
   hideExpired = false;
+  totalElements = 0;
   constructor(private taskService: TaskService,
               private router: Router) {}
   ngOnInit() {
@@ -22,8 +25,28 @@ export class TaskListComponent implements OnInit {
   }
 
   reloadData() {
-    this.tasks = this.taskService.getTaskList();
+    // this.tasks = this.taskService.getTaskList();
+    this.getTasks2({page: "0", size: "10"});
   }
+
+  private getTasks2(request) {
+    this.taskService.getTaskList2(request)
+      .subscribe(data => {
+          this.tasks = data['content'];
+          this.totalElements = data['totalElements'];
+        }
+        , error => {
+          console.log(error.error.message);
+        }
+      );
+  }
+  nextPage(event: PageEvent) {
+    const request = {};
+    request['page'] = event.pageIndex.toString();
+    request['size'] = event.pageSize.toString();
+    this.getTasks2(request);
+  }
+
   filterTasksByStatus() {
     this.tasks = this.tasks.pipe(
       map(tasks => tasks.filter(task => task.status === 'ACTIVE'))
