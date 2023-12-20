@@ -37,6 +37,25 @@ export class TaskService {
     const params = request;
     return this.http.get(environment.apiUrl + 'tasks', {params});
   }
+  sortByDueDateAsc(request) {
+    const params = request;
+    return this.http.get(environment.apiUrl + 'tasks/sort/date/asc', {params});
+  }
+
+  sortByDueDateDesc(request) {
+    const params = request;
+    return this.http.get(environment.apiUrl + 'tasks/sort/date/desc', {params});
+  }
+
+  sortByPriorityAsc(request) {
+    const params = request;
+    return this.http.get(environment.apiUrl + 'tasks/sort/priority/asc', {params});
+  }
+
+  sortByPriorityDesc(request) {
+    const params = request;
+    return this.http.get(environment.apiUrl + 'tasks/sort/priority/desc', {params});
+  }
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.baseUrl);
   }

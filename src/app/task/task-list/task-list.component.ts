@@ -14,10 +14,11 @@ import {PageEvent} from '@angular/material/paginator';
 })
 export class TaskListComponent implements OnInit {
   tasks: Observable<Task[]>;
-  // tasks: Task[];
   showActiveOnly = false;
   hideExpired = false;
   totalElements = 0;
+  request = {page: "0", size: "10"};
+  constraint= '';
   constructor(private taskService: TaskService,
               private router: Router) {}
   ngOnInit() {
@@ -26,11 +27,11 @@ export class TaskListComponent implements OnInit {
 
   reloadData() {
     // this.tasks = this.taskService.getTaskList();
-    this.getTasks2({page: "0", size: "10"});
+    this.getTasks2();
   }
 
-  private getTasks2(request) {
-    this.taskService.getTaskList2(request)
+  private getTasks2() {
+    this.taskService.getTaskList2(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
           this.totalElements = data['totalElements'];
@@ -41,21 +42,37 @@ export class TaskListComponent implements OnInit {
       );
   }
   nextPage(event: PageEvent) {
-    const request = {};
-    request['page'] = event.pageIndex.toString();
-    request['size'] = event.pageSize.toString();
-    this.getTasks2(request);
+
+    this.request['page'] = event.pageIndex.toString();
+    this.request['size'] = event.pageSize.toString();
+
+    switch (this.constraint){
+      case 'sort-dueDate-asc':
+        this.sortByDueDateO2L();
+        break;
+      case 'sort-dueDate-desc':
+        this.sortByDueDateL2O();
+        break;
+      case 'sort-priority-asc':
+        this.sortByPriorityH2L();
+        break;
+      case 'sort-priority-desc':
+        this.sortByPriorityL2H();
+        break;
+      default:
+        this.getTasks2();
+    }
   }
 
   filterTasksByStatus() {
-    this.tasks = this.tasks.pipe(
+    /*this.tasks = this.tasks.pipe(
       map(tasks => tasks.filter(task => task.status === 'ACTIVE'))
-    );
+    );*/
   }
   filterTasksByDate() {
-    this.tasks = this.tasks.pipe(
+    /*this.tasks = this.tasks.pipe(
       map(tasks => tasks.filter(task => new Date(task.dueDate) >= new Date()))
-    );
+    );*/
   }
 
   toggleFilterStatus(event: any) {
@@ -95,27 +112,55 @@ export class TaskListComponent implements OnInit {
   }
 
   sortByDueDateO2L() {
-    this.tasks = this.tasks.pipe(
-      map(tasks => tasks.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()))
-    );
+    this.constraint = 'sort-dueDate-asc';
+    this.taskService.sortByDueDateAsc(this.request)
+      .subscribe(data => {
+          this.tasks = data['content'];
+          this.totalElements = data['totalElements'];
+        }
+        , error => {
+          console.log(error.error.message);
+        }
+      );
   }
 
   sortByDueDateL2O() {
-    this.tasks = this.tasks.pipe(
-      map(tasks => tasks.sort((a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime()))
-    );
+    this.constraint = 'sort-dueDate-desc';
+    this.taskService.sortByDueDateDesc(this.request)
+      .subscribe(data => {
+          this.tasks = data['content'];
+          this.totalElements = data['totalElements'];
+        }
+        , error => {
+          console.log(error.error.message);
+        }
+      );
   }
 
   sortByPriorityH2L() {
-    this.tasks = this.tasks.pipe(
-      map(tasks => tasks.sort((a, b) => this.mapPriority(a.priority) - this.mapPriority(b.priority)))
-    );
+    this.constraint = 'sort-priority-asc';
+    this.taskService.sortByPriorityAsc(this.request)
+      .subscribe(data => {
+          this.tasks = data['content'];
+          this.totalElements = data['totalElements'];
+        }
+        , error => {
+          console.log(error.error.message);
+        }
+      );
   }
 
   sortByPriorityL2H() {
-    this.tasks = this.tasks.pipe(
-      map(tasks => tasks.sort((a, b) => this.mapPriority(b.priority) - this.mapPriority(a.priority)))
-    );
+    this.constraint = 'sort-priority-desc';
+    this.taskService.sortByPriorityDesc(this.request)
+      .subscribe(data => {
+          this.tasks = data['content'];
+          this.totalElements = data['totalElements'];
+        }
+        , error => {
+          console.log(error.error.message);
+        }
+      );
   }
 
   mapPriority(priority: string): number {
