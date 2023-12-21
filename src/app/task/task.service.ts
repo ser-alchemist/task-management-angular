@@ -37,6 +37,11 @@ export class TaskService {
     const params = request;
     return this.http.get(environment.apiUrl + 'tasks', {params});
   }
+  getTaskListC(request, filter, sortBy, type) {
+    const params = request;
+    console.log('url:' + environment.apiUrl + 'tasks/' + filter + '/sort/' + sortBy + '/' + type);
+    return this.http.get(environment.apiUrl + 'tasks/' + filter + '/sort/' + sortBy + '/' + type, {params});
+  }
   sortByDueDateAsc(request) {
     const params = request;
     return this.http.get(environment.apiUrl + 'tasks/sort/date/asc', {params});

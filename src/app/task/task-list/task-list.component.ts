@@ -18,8 +18,12 @@ export class TaskListComponent implements OnInit {
   hideExpired = false;
   totalElements = 0;
   request = {page: "0", size: "10"};
-  constraint = '';
+  constraint = 'default';
   sortBy = 'Default';
+  sortByC = 'default';
+  filter = 'all';
+  type = 'desc';
+
   constructor(private taskService: TaskService,
               private router: Router) {}
   ngOnInit() {
@@ -27,29 +31,10 @@ export class TaskListComponent implements OnInit {
   }
 
   reloadData() {
+
+    this.taskService.getTaskListC(this.request, this.filter, this.sortByC, this.type);
     // this.tasks = this.taskService.getTaskList();
-    this.constraint = 'default';
-    this.getTasks2();
-  }
-
-  private getTasks2() {
-    this.sortBy = 'Default';
-    this.taskService.getTaskList2(this.request)
-      .subscribe(data => {
-          this.tasks = data['content'];
-          this.totalElements = data['totalElements'];
-        }
-        , error => {
-          console.log(error.error.message);
-        }
-      );
-  }
-  nextPage(event: PageEvent) {
-
-    this.request['page'] = event.pageIndex.toString();
-    this.request['size'] = event.pageSize.toString();
-
-    switch (this.constraint){
+    /*switch (this.constraint) {
       case 'sort-dueDate-asc':
         this.sortByDueDateO2L();
         break;
@@ -62,29 +47,39 @@ export class TaskListComponent implements OnInit {
       case 'sort-priority-desc':
         this.sortByPriorityL2H();
         break;
-      case 'default':
+      case 'sort-default':
         this.getTasks2();
         break;
       default:
         this.getTasks2();
-    }
+    }*/
   }
 
-  filterTasksByStatus() {
-    /*this.tasks = this.tasks.pipe(
-      map(tasks => tasks.filter(task => task.status === 'ACTIVE'))
-    );*/
+  getTasks2() {
+    this.constraint = 'sort-default';
+    this.sortBy = 'Default';
+    this.sortByC = 'default';
+    this.taskService.getTaskList2(this.request)
+      .subscribe(data => {
+          this.tasks = data['content'];
+          this.totalElements = data['totalElements'];
+        }
+        , error => {
+          console.log(error.error.message);
+        }
+      );
   }
-  filterTasksByDate() {
-    /*this.tasks = this.tasks.pipe(
-      map(tasks => tasks.filter(task => new Date(task.dueDate) >= new Date()))
-    );*/
+  nextPage(event: PageEvent) {
+    this.request['page'] = event.pageIndex.toString();
+    this.request['size'] = event.pageSize.toString();
+    this.reloadData();
   }
 
   toggleFilterStatus(event: any) {
     this.showActiveOnly = event.target.checked;
     if (this.showActiveOnly) {
-      this.filterTasksByStatus();
+      this.filter = 'active';
+      this.reloadData();
     } else {
       this.reloadData();
     }
@@ -93,7 +88,8 @@ export class TaskListComponent implements OnInit {
   toggleFilterDate(event: any) {
     this.hideExpired = event.target.checked;
     if (this.hideExpired) {
-      this.filterTasksByDate();
+      this.filter = 'valid';
+      this.reloadData();
     } else {
       this.reloadData();
     }
@@ -118,6 +114,8 @@ export class TaskListComponent implements OnInit {
   }
 
   sortByDueDateO2L() {
+    this.sortByC = 'date';
+    this.type = 'asc';
     this.constraint = 'sort-dueDate-asc';
     this.sortBy = 'Due Date (Oldest to Latest)';
     this.taskService.sortByDueDateAsc(this.request)
@@ -132,6 +130,8 @@ export class TaskListComponent implements OnInit {
   }
 
   sortByDueDateL2O() {
+    this.sortByC = 'date';
+    this.type = 'desc';
     this.constraint = 'sort-dueDate-desc';
     this.sortBy = 'Due Date (Latest to Oldest)';
     this.taskService.sortByDueDateDesc(this.request)
@@ -146,6 +146,8 @@ export class TaskListComponent implements OnInit {
   }
 
   sortByPriorityH2L() {
+    this.sortByC = 'priority';
+    this.type = 'asc';
     this.constraint = 'sort-priority-asc';
     this.sortBy = 'Priority (High to Low)';
     this.taskService.sortByPriorityAsc(this.request)
@@ -160,6 +162,8 @@ export class TaskListComponent implements OnInit {
   }
 
   sortByPriorityL2H() {
+    this.sortByC = 'priority';
+    this.type = 'desc';
     this.constraint = 'sort-priority-desc';
     this.sortBy = 'Priority (Low to High)';
     this.taskService.sortByPriorityDesc(this.request)
@@ -171,19 +175,6 @@ export class TaskListComponent implements OnInit {
           console.log(error.error.message);
         }
       );
-  }
-
-  mapPriority(priority: string): number {
-    switch (priority) {
-      case 'LOW':
-        return 2;
-      case 'MEDIUM':
-        return 1;
-      case 'HIGH':
-        return 0;
-      default:
-        return 999; // Handle other cases if necessary
-    }
   }
 
   getStatusClass(status: string): string {
