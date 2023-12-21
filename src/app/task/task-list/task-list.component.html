@@ -18,9 +18,11 @@
       </div>
 
       <div class="col">
+        <a>Sort By: </a>
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle">Sort By</button>
+          <button class="btn btn-light dropdown-toggle">{{sortBy}}</button>
           <div class="dropdown-content">
+            <button class="dropdown-item" type="button" (click)="reloadData()">Default</button>
             <button class="dropdown-item" type="button" (click)="sortByDueDateL2O()">Due Date (Latest to Oldest)</button>
             <button class="dropdown-item" type="button" (click)="sortByDueDateO2L()">Due Date (Oldest to Latest)</button>
             <button class="dropdown-item" type="button" (click)="sortByPriorityH2L()">Priority (High to Low)</button>

@@ -18,7 +18,8 @@ export class TaskListComponent implements OnInit {
   hideExpired = false;
   totalElements = 0;
   request = {page: "0", size: "10"};
-  constraint= '';
+  constraint = '';
+  sortBy = 'Default';
   constructor(private taskService: TaskService,
               private router: Router) {}
   ngOnInit() {
@@ -27,10 +28,12 @@ export class TaskListComponent implements OnInit {
 
   reloadData() {
     // this.tasks = this.taskService.getTaskList();
+    this.constraint = 'default';
     this.getTasks2();
   }
 
   private getTasks2() {
+    this.sortBy = 'Default';
     this.taskService.getTaskList2(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
@@ -58,6 +61,9 @@ export class TaskListComponent implements OnInit {
         break;
       case 'sort-priority-desc':
         this.sortByPriorityL2H();
+        break;
+      case 'default':
+        this.getTasks2();
         break;
       default:
         this.getTasks2();
@@ -113,6 +119,7 @@ export class TaskListComponent implements OnInit {
 
   sortByDueDateO2L() {
     this.constraint = 'sort-dueDate-asc';
+    this.sortBy = 'Due Date (Oldest to Latest)';
     this.taskService.sortByDueDateAsc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
@@ -126,6 +133,7 @@ export class TaskListComponent implements OnInit {
 
   sortByDueDateL2O() {
     this.constraint = 'sort-dueDate-desc';
+    this.sortBy = 'Due Date (Latest to Oldest)';
     this.taskService.sortByDueDateDesc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
@@ -139,6 +147,7 @@ export class TaskListComponent implements OnInit {
 
   sortByPriorityH2L() {
     this.constraint = 'sort-priority-asc';
+    this.sortBy = 'Priority (High to Low)';
     this.taskService.sortByPriorityAsc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
@@ -152,6 +161,7 @@ export class TaskListComponent implements OnInit {
 
   sortByPriorityL2H() {
     this.constraint = 'sort-priority-desc';
+    this.sortBy = 'Priority (Low to High)';
     this.taskService.sortByPriorityDesc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
