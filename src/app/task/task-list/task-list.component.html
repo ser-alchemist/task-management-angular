@@ -56,9 +56,9 @@
 <!--        <button type="button" class="btn btn-success btn-sm" *ngIf="task.status === 'ACTIVE'" (click)="makeTaskComplete(task.tid)" title="Mark as complete"><i class="material-icons" style="font-size: smaller; font-weight: bolder">done</i></button></td>-->
         <td [ngClass]="getStatusClass(task.priority)">{{task.priority}}</td>
         <td>
-          <button (click)="deleteTask(task.tid)" class="btn btn-danger" title="Delete"><i class="material-icons">delete</i></button>
-          <button (click)="updateTask(task.tid)" class="btn btn-warning" title="Update" style="margin-left: 10px"><i class="material-icons">update</i></button>
-          <button (click)="taskDetails(task.tid)" class="btn btn-info" title="Details" style="margin-left: 10px"><i class="material-icons">info</i></button>
+          <button (click)="deleteTask(task.tid)" class="btn btn-danger btn-sm" title="Delete"><i class="material-icons" style="font-size: small">delete</i></button>
+          <button (click)="updateTask(task.tid)" class="btn btn-warning btn-sm" title="Update" style="margin-left: 10px"><i class="material-icons" style="font-size: small">update</i></button>
+          <button (click)="taskDetails(task.tid)" class="btn btn-info btn-sm" title="Details" style="margin-left: 10px"><i class="material-icons" style="font-size: small">info</i></button>
         </td>
       </tr>
       </tbody>
