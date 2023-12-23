@@ -8,30 +8,36 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class TaskService {
-  private baseUrl = 'http://localhost:8080/api/v1/tasks';
+  private baseUrl = 'http://localhost:8080/api/v1/';
 
   constructor(private http: HttpClient) { }
 
   getTask(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+    return this.http.get(`${this.baseUrl}/tasks/${id}`);
   }
 
   // tslint:disable-next-line:ban-types
   createTask(task: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, task);
+    return this.http.post(`${this.baseUrl}/tasks/`, task);
   }
 
   // tslint:disable-next-line:ban-types
   updateTask(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+    return this.http.put(`${this.baseUrl}/tasks/${id}`, value);
   }
 
+  makeTaskCompleted(id: number): Observable<any> {
+    console.log('url:' + `${this.baseUrl}/tasks/makeComplete/${id}`);
+    return this.http.put(`${this.baseUrl}/tasks/makeComplete/${id}`, null);
+  }
+
+
   deleteTask(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/tasks/${id}`, { responseType: 'text' });
   }
 
   getTaskList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}/tasks/`);
   }
   getTaskList2(request) {
     const params = request;
@@ -62,7 +68,7 @@ export class TaskService {
     return this.http.get(environment.apiUrl + 'tasks/sort/priority/desc', {params});
   }
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.baseUrl);
+    return this.http.get<Task[]>(this.baseUrl + 'tasks/');
   }
 
 }

@@ -136,6 +136,9 @@ export class TaskListComponent implements OnInit {
     this.router.navigate(['update', id]);
   }
 
+  makeTaskComplete(id: number) {
+    this.taskService.makeTaskCompleted(id);
+  }
   sortByDueDateO2L() {
     this.sortByC = 'date';
     this.type = 'asc';
