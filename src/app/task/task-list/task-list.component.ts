@@ -31,8 +31,15 @@ export class TaskListComponent implements OnInit {
   }
 
   reloadData() {
-
-    this.taskService.getTaskListC(this.request, this.filter, this.sortByC, this.type);
+    this.taskService.getTaskListC(this.request, this.filter, this.sortByC, this.type)
+                                  .subscribe(data => {
+                                      this.tasks = data['content'];
+                                      this.totalElements = data['totalElements'];
+                                    }
+                                    , error => {
+                                      console.log(error.error.message);
+                                    }
+                                  );
     // this.tasks = this.taskService.getTaskList();
     /*switch (this.constraint) {
       case 'sort-dueDate-asc':
@@ -78,21 +85,37 @@ export class TaskListComponent implements OnInit {
   toggleFilterStatus(event: any) {
     this.showActiveOnly = event.target.checked;
     if (this.showActiveOnly) {
-      this.filter = 'active';
-      this.reloadData();
+      if (this.filter === 'valid') {
+        this.filter = 'active&valid';
+      } else {
+        this.filter = 'active';
+      }
     } else {
-      this.reloadData();
+      if (this.filter === 'active&valid') {
+        this.filter = 'valid';
+      } else {
+        this.filter = 'all';
+      }
     }
+    this.reloadData();
   }
 
   toggleFilterDate(event: any) {
     this.hideExpired = event.target.checked;
     if (this.hideExpired) {
-      this.filter = 'valid';
-      this.reloadData();
+      if (this.filter === 'active') {
+        this.filter = 'active&valid';
+      } else {
+        this.filter = 'valid';
+      }
     } else {
-      this.reloadData();
+      if (this.filter === 'active&valid') {
+        this.filter = 'active';
+      } else {
+        this.filter = 'all';
+      }
     }
+    this.reloadData();
   }
 
   deleteTask(id: number) {
@@ -118,7 +141,8 @@ export class TaskListComponent implements OnInit {
     this.type = 'asc';
     this.constraint = 'sort-dueDate-asc';
     this.sortBy = 'Due Date (Oldest to Latest)';
-    this.taskService.sortByDueDateAsc(this.request)
+    this.reloadData();
+    /*this.taskService.sortByDueDateAsc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
           this.totalElements = data['totalElements'];
@@ -126,7 +150,7 @@ export class TaskListComponent implements OnInit {
         , error => {
           console.log(error.error.message);
         }
-      );
+      );*/
   }
 
   sortByDueDateL2O() {
@@ -134,7 +158,8 @@ export class TaskListComponent implements OnInit {
     this.type = 'desc';
     this.constraint = 'sort-dueDate-desc';
     this.sortBy = 'Due Date (Latest to Oldest)';
-    this.taskService.sortByDueDateDesc(this.request)
+    this.reloadData();
+    /*this.taskService.sortByDueDateDesc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
           this.totalElements = data['totalElements'];
@@ -142,7 +167,7 @@ export class TaskListComponent implements OnInit {
         , error => {
           console.log(error.error.message);
         }
-      );
+      );*/
   }
 
   sortByPriorityH2L() {
@@ -150,7 +175,8 @@ export class TaskListComponent implements OnInit {
     this.type = 'asc';
     this.constraint = 'sort-priority-asc';
     this.sortBy = 'Priority (High to Low)';
-    this.taskService.sortByPriorityAsc(this.request)
+    this.reloadData();
+    /*this.taskService.sortByPriorityAsc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
           this.totalElements = data['totalElements'];
@@ -158,7 +184,7 @@ export class TaskListComponent implements OnInit {
         , error => {
           console.log(error.error.message);
         }
-      );
+      );*/
   }
 
   sortByPriorityL2H() {
@@ -166,7 +192,8 @@ export class TaskListComponent implements OnInit {
     this.type = 'desc';
     this.constraint = 'sort-priority-desc';
     this.sortBy = 'Priority (Low to High)';
-    this.taskService.sortByPriorityDesc(this.request)
+    this.reloadData();
+    /*this.taskService.sortByPriorityDesc(this.request)
       .subscribe(data => {
           this.tasks = data['content'];
           this.totalElements = data['totalElements'];
@@ -174,7 +201,7 @@ export class TaskListComponent implements OnInit {
         , error => {
           console.log(error.error.message);
         }
-      );
+      );*/
   }
 
   getStatusClass(status: string): string {
@@ -197,13 +224,13 @@ export class TaskListComponent implements OnInit {
   }
 
   getDateStatus(dueDate: string): string {
-    if (new Date(dueDate) >= new Date()) {
-      return 'status-valid';
-    } else {
+    // console.log('due date: ' + new Date(dueDate). + ' new date: ' + new Date());
+    const taskDueDate = new Date(dueDate);
+    taskDueDate.setHours(23, 59, 59, 999);
+    if (taskDueDate < new Date()) {
       return 'status-expired';
+    } else {
+      return 'status-valid';
     }
   }
-
-
-
 }
