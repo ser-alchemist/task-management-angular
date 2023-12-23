@@ -52,8 +52,8 @@
       <tr *ngFor="let task of tasks">
         <td>{{task.description}}</td>
         <td [ngClass]="getDateStatus(task.dueDate)">{{task.dueDate}}</td>
-        <td [ngClass]="getStatusClass(task.status)">{{task.status}}&nbsp;&nbsp;
-        <button type="button" class="btn btn-success btn-sm" *ngIf="task.status === 'ACTIVE'" (click)="makeTaskComplete(task.tid)" title="Mark as complete"><i class="material-icons" style="font-size: smaller; font-weight: bolder">done</i></button></td>
+        <td [ngClass]="getStatusClass(task.status)">{{task.status}}&nbsp;&nbsp;</td>
+<!--        <button type="button" class="btn btn-success btn-sm" *ngIf="task.status === 'ACTIVE'" (click)="makeTaskComplete(task.tid)" title="Mark as complete"><i class="material-icons" style="font-size: smaller; font-weight: bolder">done</i></button></td>-->
         <td [ngClass]="getStatusClass(task.priority)">{{task.priority}}</td>
         <td>
           <button (click)="deleteTask(task.tid)" class="btn btn-danger" title="Delete"><i class="material-icons">delete</i></button>
