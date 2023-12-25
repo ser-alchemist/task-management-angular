@@ -97,6 +97,7 @@ export class TaskListComponent implements OnInit {
         this.filter = 'all';
       }
     }
+    this.request['page'] = "0";
     this.reloadData();
   }
 
@@ -115,6 +116,7 @@ export class TaskListComponent implements OnInit {
         this.filter = 'all';
       }
     }
+    this.request['page'] = "0";
     this.reloadData();
   }
 
