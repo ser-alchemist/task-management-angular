@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Router } from '@angular/router';
+import {Observable} from 'rxjs';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   email = "";
   password = "";
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private sharedService: SharedService) {}
 
   ngOnInit(): void {
   }
@@ -31,6 +33,11 @@ export class LoginComponent implements OnInit {
       if (resultData.message === "Email not exits") {
         alert("Email not exits");
       } else if (resultData.message === "Login Success") {
+        const params = new HttpParams().set('email', this.email);
+        this.http.get("http://localhost:8080/api/v1/user/getUid", { params }).subscribe((uid: number) => {
+          console.log("uid is :" + uid);
+          this.sharedService.setUid(uid);
+          });
         this.router.navigateByUrl('/tasks');
       } else {
         alert("Email and Password not match");

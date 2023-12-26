@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Task} from '../task';
+import { SharedService } from '../../shared.service';
 import {TaskService} from '../task.service';
 import {Router} from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -23,15 +24,17 @@ export class TaskListComponent implements OnInit {
   sortByC = 'default';
   filter = 'all';
   type = 'desc';
+  uid: number;
 
-  constructor(private taskService: TaskService,
-              private router: Router) {}
+  constructor(private taskService: TaskService, private router: Router, private sharedService: SharedService) {}
   ngOnInit() {
+    this.uid = this.sharedService.getUid();
+    console.log('UID:', this.uid);
     this.reloadData();
   }
 
   reloadData() {
-    this.taskService.getTaskListC(this.request, this.filter, this.sortByC, this.type)
+    this.taskService.getTaskListC(this.uid, this.request, this.filter, this.sortByC, this.type)
                                   .subscribe(data => {
                                       this.tasks = data['content'];
                                       this.totalElements = data['totalElements'];
