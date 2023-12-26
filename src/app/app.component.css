@@ -1,5 +1,11 @@
-/*
-div{
-  background: #fdffea;
+ul {
+  list-style: none; /* Remove default list styles */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Use flexbox layout */
+  justify-content: space-between; /* Distribute items with space between them */
 }
-*/
+
+.right-align {
+  margin-left: auto; /* Move the last item to the right by pushing it with auto margin */
+}
