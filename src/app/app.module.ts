@@ -12,6 +12,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -21,7 +24,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CreateTaskComponent,
     TaskDetailsComponent,
     TaskListComponent,
-    UpdateTaskComponent
+    UpdateTaskComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
