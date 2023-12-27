@@ -24,6 +24,8 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { E403Component } from './errors/e403/e403.component';
+
 
 
 
@@ -40,7 +42,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    E403Component
   ],
   imports: [
     BrowserModule,

@@ -31,8 +31,8 @@
       </li>
     </ul>
 
-
-      <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn">
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav" *ngIf="isLoggedIn">
         <li class="nav-item">
           <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
         </li>
@@ -40,6 +40,7 @@
           <a href class="nav-link" (click)="logout()">LogOut</a>
         </li>
       </ul>
+    </div>
 
   </nav>
 

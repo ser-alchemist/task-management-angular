@@ -30,7 +30,7 @@ export class UpdateTaskComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  updateEmployee() {
+  updateTask() {
     // this.task.status = 'ACTIVE';
     this.taskService.updateTask(this.id, this.task)
       .subscribe(data => {
@@ -42,7 +42,7 @@ export class UpdateTaskComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.updateEmployee();
+      this.updateTask();
       console.log('Form submitted successfully:', this.task);
     } else {
       console.log('Please fill in all required fields.');

@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class TaskService {
-  private baseUrl = 'http://localhost:8080/api/v1/';
+  private baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class TaskService {
 
   // tslint:disable-next-line:ban-types
   createTask(task: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/tasks/`, task);
+    return this.http.post(`${this.baseUrl}/tasks`, task);
   }
 
   // tslint:disable-next-line:ban-types
