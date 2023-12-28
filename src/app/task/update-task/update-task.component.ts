@@ -18,6 +18,7 @@ export class UpdateTaskComponent implements OnInit {
               private taskService: TaskService) { }
 
   ngOnInit() {
+    window.history.pushState({}, document.title, '/task/update');
     this.task = new Task();
 
     this.id = this.route.snapshot.params['id'];
@@ -27,17 +28,17 @@ export class UpdateTaskComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.task = data;
-      }, error => console.log(error));
+      }, error => this.router.navigate(['/e404']));
   }
 
   updateTask() {
-    // this.task.status = 'ACTIVE';
+    console.log('Update task => task id:' + this.id);
     this.taskService.updateTask(this.id, this.task)
       .subscribe(data => {
         console.log(data);
         this.task = new Task();
         this.gotoList();
-      }, error => console.log(error));
+      }, error => this.router.navigate(['/e404']));
   }
 
   onSubmit(form: NgForm) {

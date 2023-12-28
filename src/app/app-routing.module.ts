@@ -13,6 +13,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { E403Component } from './errors/e403/e403.component';
+import { E404Component } from './errors/e404/e404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'add', component: CreateTaskComponent },
   { path: 'update/:id', component: UpdateTaskComponent },
   { path: 'details/:id', component: TaskDetailsComponent },
+  { path: 'details', component: TaskDetailsComponent },
 
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -29,6 +31,8 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'e403', component: E403Component },
+  { path: 'e404', component: E404Component },
+  { path: '**', pathMatch: 'full', component: E404Component}
 
 ];
 

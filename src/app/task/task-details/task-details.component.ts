@@ -16,15 +16,14 @@ export class TaskDetailsComponent implements OnInit {
               private taskService: TaskService) { }
 
   ngOnInit() {
+    window.history.pushState({}, document.title, '/task/detail');
     this.task = new Task();
-
     this.id = this.route.snapshot.params['id'];
-
     this.taskService.getTask(this.id)
       .subscribe(data => {
         // console.log(data);
         this.task = data;
-      }, error => console.log(error));
+      }, error => this.router.navigate(['e404']));
   }
 
   list() {

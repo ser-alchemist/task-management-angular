@@ -29,6 +29,9 @@ export class TaskListComponent implements OnInit {
   ngOnInit() {
     this.reloadData();
   }
+  reloadPage(): void {
+    window.location.reload();
+  }
 
   reloadData() {
     this.taskService.getTaskListC(this.request, this.filter, this.sortByC, this.type)
@@ -66,7 +69,9 @@ export class TaskListComponent implements OnInit {
     this.constraint = 'sort-default';
     this.sortBy = 'Default';
     this.sortByC = 'default';
-    this.taskService.getTaskList2(this.request)
+    this.filter = 'all';
+    this.type = 'desc';
+    this.taskService.getTaskListC(this.request, this.filter, this.sortByC, this.type)
       .subscribe(data => {
           this.tasks = data['content'];
           this.totalElements = data['totalElements'];
