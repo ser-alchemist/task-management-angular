@@ -1,5 +1,32 @@
-<div class="container">
-  <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
-</div>
+<!-- Hero Section -->
+
+<section class="hero-section" >
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <p class="material-icons" style="font-size: 200px; color: white">directions_run</p>
+        <h1 class="display-3">Welcome to TaskMan</h1>
+        <p class="lead">Manage your tasks efficiently with TaskMan.</p>
+        <div class="cta-buttons">
+          <a href="/login" class="btn btn-primary btn-lg" *ngIf="!isLoggedIn">Login</a>&nbsp;&nbsp;&nbsp;
+          <a href="/register" class="btn btn-secondary btn-lg" *ngIf="!isLoggedIn">Sign Up</a>&nbsp;&nbsp;&nbsp;
+          <a href="/tasks" class="btn btn-primary btn-lg" *ngIf="isLoggedIn">Go to Task List</a>&nbsp;&nbsp;&nbsp;
+          <a href="/add" class="btn btn-secondary btn-lg" *ngIf="isLoggedIn">Add Task</a>&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Additional content -->
+<!--<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h2>About TaskMan</h2>
+        <p>TaskMan is a task management platform designed to help you organize and keep track of your tasks effectively.</p>
+        <p>It provides features for task creation, tracking, prioritization, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>-->
