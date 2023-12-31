@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="col">
+     <!-- <div class="col">
         <a>Sort By: </a>
         <div class="dropdown">
           <button class="btn btn-light dropdown-toggle">{{sortBy}}</button>
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 
 
@@ -42,15 +42,23 @@
       <thead>
       <tr>
         <th>Description</th>
-        <th>Due Date</th>
+        <th>Due Date
+          <button (click)="sortByDueDateO2L()" *ngIf="sortByC==='default' || sortByC==='priority'" type="button" class="btn btn-link"><i class="material-icons" style="font-weight: bold; font-size: small">unfold_more</i></button>
+          <button (click)="sortByDueDateL2O()" *ngIf="sortByC==='date' && type==='asc'" type="button" class="btn btn-link"><i class="material-icons" style="font-weight: bold; font-size: small">keyboard_arrow_up</i></button>
+          <button (click)="sortByDueDateO2L()" *ngIf="sortByC==='date' && type==='desc'" class="btn btn-link"><i class="material-icons" style="font-weight: bold; font-size: small">keyboard_arrow_down</i></button>
+        </th>
         <th>Status</th>
-        <th>Priority</th>
+        <th>Priority
+          <button (click)="sortByPriorityL2H()" *ngIf="sortByC==='default' || sortByC==='date'" type="button" class="btn btn-link"><i class="material-icons" style="font-weight: bold; font-size: small">unfold_more</i></button>
+          <button (click)="sortByPriorityH2L()" *ngIf="sortByC==='priority' && type==='desc'" type="button" class="btn btn-link"><i class="material-icons" style="font-weight: bold; font-size: small">keyboard_arrow_up</i></button>
+          <button (click)="sortByPriorityL2H()" *ngIf="sortByC==='priority' && type==='asc'" class="btn btn-link"><i class="material-icons" style="font-weight: bold; font-size: small">keyboard_arrow_down</i></button>
+        </th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let task of tasks">
-        <td>{{task.description}}</td>
+        <td>{{task.description.substring(0, 30)}}</td>
         <td [ngClass]="getDateStatus(task.dueDate)">{{task.dueDate}}</td>
         <td [ngClass]="getStatusClass(task.status)">{{task.status}}&nbsp;&nbsp;</td>
 <!--        <button type="button" class="btn btn-success btn-sm" *ngIf="task.status === 'ACTIVE'" (click)="makeTaskComplete(task.tid)" title="Mark as complete"><i class="material-icons" style="font-size: smaller; font-weight: bolder">done</i></button></td>-->
